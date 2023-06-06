@@ -12,7 +12,7 @@ import {
 import { TodoDto } from './todo.dto';
 import { Todo } from './todo.entity';
 import { TodoService } from './todo.service';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiQuery } from '@nestjs/swagger';
 import { Pagination } from 'nestjs-typeorm-paginate/dist/pagination';
 
 @Controller('todo')
