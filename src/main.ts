@@ -8,12 +8,19 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app: NestExpressApplication = await NestFactory.create(AppModule);
   app.enableCors();
+  app.setGlobalPrefix('/api/v1');
 
+  /**
+   * swagger configuration section
+   */
   const configSwagger = new DocumentBuilder()
     .setTitle('Todo API')
     .setDescription('The todo example whit nestjs')
+    .setContact("Sumerio Code","", "sumeriocode@gmail.com")
     .setVersion('1.0')
-    .addTag('Todo')
+    .addServer('http://localhost:3000')
+    .addServer('https://localhost:3000')
+    .addTag('Todo', 'Set of Apis of Todo')
     .build();
 
   const document = SwaggerModule.createDocument(app, configSwagger);
