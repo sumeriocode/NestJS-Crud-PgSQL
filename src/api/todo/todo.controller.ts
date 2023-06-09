@@ -28,6 +28,12 @@ export class TodoController {
   @ApiOperation({ summary: 'obtain all todos' })
   @ApiResponse({ status: 200, description: 'get all todos', type: Todo })
   @ApiQuery({
+    name: 'search',
+    description: 'search data',
+    required: false,
+    type: String
+  })
+  @ApiQuery({
     name: 'page',
     description: 'pagination page',
     required: false
@@ -38,11 +44,12 @@ export class TodoController {
     required: false
   })
   public getTodos(
+    @Query('search') search = '',
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
   ): Promise<Pagination<Todo>> {
     limit = limit > 100 ? 100 : limit;
-    return this.service.getTodos({
+    return this.service.getTodos(search,{
       page,
       limit,
       route: 'http://localhost:3000/todo',
